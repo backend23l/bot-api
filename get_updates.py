@@ -18,16 +18,19 @@ def get_last_update(updates: dict) -> dict:
 
     return last_update
 
-last_update_id = -1
-while True:
-    updates = get_updates(URL)
-    last_update = get_last_update(updates)
+def main():
+    last_update_id = -1
+    while True:
+        updates = get_updates(URL)
+        last_update = get_last_update(updates)
 
-    if last_update['update_id'] != last_update_id:
-        user = last_update['message']['from']
-        text = last_update['message']['text']
-        print(text, 'from', user['first_name'])
+        if last_update['update_id'] != last_update_id:
+            user = last_update['message']['from']
+            text = last_update['message']['text']
+            print(text, 'from', user['first_name'])
 
-        last_update_id = last_update['update_id']
+            last_update_id = last_update['update_id']
 
-    sleep(0.5)
+        sleep(0.5)
+
+main()
