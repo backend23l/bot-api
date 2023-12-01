@@ -1,5 +1,5 @@
 import requests
-from settings import URL
+from settings import url
 
 
 def getMe(url: str) -> dict:
@@ -13,5 +13,5 @@ def getMe(url: str) -> dict:
     return response.status_code
 
 
-result = getMe(URL)
+result = getMe(url)
 print(result)
