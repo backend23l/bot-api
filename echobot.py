@@ -40,7 +40,7 @@ def send_massage(url:str,chat_id:int,text:str):
             'text': text,
         }
         requests.get(url, params=payload)
-        sleep(0.4)
-chat_id = echobot_chatid()
+        sleep(0.4) 
+chat_id = echobot_chatid() 
 text = echobot_update_last()
 send_massage(url, chat_id, text)
