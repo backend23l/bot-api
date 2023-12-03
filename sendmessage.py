@@ -6,10 +6,10 @@ while True:
         endpoint = '/sendMessage'
         url+=endpoint
         payload = {
-            'chat_id': 5815225140, #-1002102062683, #5128222065
+            'chat_id': 6268298385,#5815225140, #-1002102062683, #5128222065
             'text': text,
         }
         requests.get(url, params=payload)
 
-    send_massage(url, chat_id, "Assalomu aleykum")
+    send_massage(url, 6268298385, "Salom :(")
     sleep(0.3)

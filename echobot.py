@@ -6,33 +6,15 @@ def echobot_update(url:str):
     url+=endpoint
     respons = requests.get(url)
     if respons.status_code==200:
-        return respons.json()
+        result = respons.json()['result']
+        if len(result)!=0:
+            return result[-1]
+        else :
+            return 404
     else:
         return respons.status_code
-def get_last_updets(updets:dict):
-    last_updet = updets['result'][-1]
-    return last_updet
-def echobot_update_last():
-    last_updet_id = -1
-    while True:
-        updets = echobot_update(url)
-        last_updets = get_last_updets(updets)
-        if last_updets['update_id']!=last_updet_id:
-            text = last_updets['message']['text']
-            last_updet_id = last_updets['update_id']
-        return text
-def echobot_chatid():
-    last_updet_id = -1
-    while True:
-        updets = echobot_update(url)
-        last_updets = get_last_updets(updets)
-        if last_updets['update_id']!=last_updet_id:
-            chat_id = last_updets['message']['chat']['id']
-            last_updet_id = last_updets['update_id']
-        return chat_id
-
+print(echobot_update(url))
 def send_massage(url:str,chat_id:int,text:str):
-    while True:
         endpoint = '/sendMessage'
         url+=endpoint
         payload = {
@@ -40,7 +22,19 @@ def send_massage(url:str,chat_id:int,text:str):
             'text': text,
         }
         requests.get(url, params=payload)
-        sleep(0.4) 
-chat_id = echobot_chatid() 
-text = echobot_update_last()
-send_massage(url, chat_id, text)
+def main(url:str):
+    last_update_id = -1
+    while True:
+        crr_update = echobot_update(url)
+        if crr_update['update_id']!=last_update_id:
+            user = crr_update['message']['from']
+            text = crr_update['message'].get("text")
+            if text is None:
+                pass
+            else:
+                send_massage(url,user['id'],text)
+            last_update_id=crr_update['update_id']
+        sleep(0.5)
+main(url)
+                
+             

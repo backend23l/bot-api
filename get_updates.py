@@ -11,7 +11,7 @@ def get_updates(url: str) -> dict:
     if response.status_code == 200:
         return response.json()  
     return response.status_code
-# print(get_updates(url))
+print(get_updates(url))
 def get_last_update(updates: dict) -> dict:
     last_update = updates['result'][-1] 
 
