@@ -14,22 +14,27 @@ def send_message(url: str, chat_id: int, text: str, reply_markup: dict):
     requests.post(url, json=data)
 
 btn1 = {
-    "text": "share contact",
-    "request_contact": True
+    "text": "google",
+    "url": "http://google.com"
 }
 btn2 = {
-    "text": "location",
-    "request_location": True
+    "text": "Naxalov",
+    "url": "https://t.me/naxalov"
 }
-btn3 = {"text": "button 3"}
+btn3 = {
+    "text": "call back",
+    "callback_data": "btn3"
+}
 
 reply_markup = {
-    "keyboard": [
-        [btn1, btn2],
-        [btn3]
-    ],
-    "resize_keyboard": True,
-    # "one_time_keyboard": True,
+    "inline_keyboard": [
+        [
+            btn1, btn2
+        ],
+        [
+            btn3
+        ]
+    ]
 }
 
-send_message(URL, chat_id, 'hi', reply_markup)
+send_message(URL, chat_id, 'press one of the buttons', reply_markup)
